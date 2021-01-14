@@ -1,9 +1,9 @@
-require 'pry'
+
 "hi"
 #########################
 # Data for the newsletter
 #########################
-require "pry"
+
 CAMPUS = {
   "name": "DC",
   "address": "1440 G St NW, Washington, DC 20005",
@@ -27,37 +27,37 @@ ARTICLES = [
 # Methods to generate the newsletter
 #########################
 
-def calculate_recipients(array)
-  return SUBSCRIBERS
-  # Using the SUBSCRIBERS and UNSUBSCRIBED arrays,
-  # write a method that will return an array of only the subscribers who haven't unsubscribed
+def calculate_recipients
+  
+  SUBSCRIBERS.difference(UNSUBSCRIBED)
 end
 
 def first_n_articles(number_of_articles)
   ARTICLES.first(number_of_articles)
 end
 
-def print_recipients(array)
-  calculate_recipients.join(", ")
-  
-  # Write a method that uses the output of calculate_recipients
-  # and returns a list of emails separated by commas
-  # Ex) "abc@email.com, def@email.com, ghi@email.com"
+def print_recipients
+ 
+  puts calculate_recipients.join(", ")
 end
 
 def print_one_article(article)
   # Write a method that will take an article hash
   # and print the title, author and text as a formatted string
   # See the README/sample output for examples
+  print "#{article[:title]} \n #{article[:author]} \n #{article[:text]}"
+  
 end
 
 def print_many_articles(articles)
-  # Write a method that will take in an array of article hashes
-  # and format each one using the print_one_article method
+  articles.each do |article| 
+    print_one_article(article)
+  end
+  
 end
 
 def format_campus_location(campus)
-  "Flatiron #{campus["name"]}"
+  "Flatiron #{campus[:name]}"
 end
 
 def format_subject
@@ -83,15 +83,12 @@ def print_newsletter(number)
   print_many_articles(articles)
   puts format_footer(CAMPUS)
 
-  end
+
 end
 
 def run
-  # We want our program to print three articles by default,
-  # but we can change that number here
-  print_newsletter("3")
+  
+  print_newsletter(3)
 end
 
-# When we run "ruby newsletter.rb" in the command line,
-# the 'run' method will be called because we're calling it below.
 run
